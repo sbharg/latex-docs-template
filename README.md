@@ -1,1 +1,1 @@
-##  $\latex$ Report Template
+##  $\LaTeX$ Report Template
