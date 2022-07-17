@@ -1,0 +1,217 @@
+% Required for TeX packages
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[custom shortcuts as a package]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Pdf Packages
+%------------%
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{microtype}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[english]{babel}
+\RequirePackage{csquotes}
+\DeclareUnicodeCharacter{2212}{-}
+\RequirePackage{comment}
+\RequirePackage[page]{appendix}
+
+\RequirePackage{booktabs}
+\RequirePackage{xspace}
+\RequirePackage{enumitem}
+
+\RequirePackage{pdfrender}
+\makeatletter
+\let\normalrender\PdfRender@NormalColorHook
+\let\PdfRender@NormalColorHook\@empty
+\newcommand*{\textnormalrender}[1]{%
+  \begingroup\normalrender#1\endgroup
+}
+\makeatother
+
+\pdfrender{TextRenderingMode=2,LineWidth=0.1pt}%
+
+% Makes title bold
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE\bfseries\@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+%\RequirePackage{lipsum} 
+
+% Math Packages
+%-------------%
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mathtools}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+
+% Colors + Refs
+%-------------%
+\RequirePackage{color}
+\RequirePackage[dvipsnames]{xcolor}
+\definecolor{Red}{rgb}{1,0,0}
+\def\red{\color{Red}}
+\definecolor{Blue}{rgb}{0,0,1}
+\def\blue{\color{Blue}}
+\definecolor{linkcolor}{rgb}{0, 0.25, 0.75}
+
+\RequirePackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkcolor,
+  citecolor=linkcolor,
+}
+\RequirePackage[nameinlink,capitalize]{cleveref}
+ 
+% Algorithms
+%----------%
+%\RequirePackage{algorithmicx}
+\RequirePackage{algorithm}
+\RequirePackage[endLComment=]{algpseudocodex}
+%\RequirePackage[commentColor=linkcolor]{algpseudocodex}
+
+% Tikz + Graphics
+%---------------%
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\RequirePackage{graphicx}
+\RequirePackage[labelfont=bf]{caption}
+\RequirePackage{subcaption}
+
+% Paper dimensions - A4 vs Letterpaper
+%------------------------------------%
+%\RequirePackage[letterpaper, margin=1in]{geometry}
+\RequirePackage[a4paper, margin=2cm]{geometry}
+%------------------------------------%
+ 
+% Bib Management - biblatex vs bibtex
+%-----------------------------------%
+%\RequirePackage[backend = biber, doi = false, maxcitenames = 2, maxbibnames = 99, isbn = false, url = false, style = numeric, natbib = true]{biblatex}
+\RequirePackage[square,numbers]{natbib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands -- math symbols and math shortcuts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Shortcuts for left/right parentheses, square brackets, and curly braces
+\newcommand{\lrp}[1]{\left( #1 \right)}
+\newcommand{\lrb}[1]{\left[ #1 \right]}
+\newcommand{\lrc}[1]{\left\{ #1 \right\}}
+\newcommand{\lrv}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ceil}[1]{{\lceil {#1} \rceil}}
+\newcommand{\floor}[1]{{\lfloor {#1} \rfloor}}
+
+% Commonly-used sets
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\RR}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\powerset}{\ensuremath{\mathcal{P}}}
+
+% Complexity
+\newcommand{\NP}{\ensuremath{\textsf{NP}}}
+\newcommand{\NPH}{\ensuremath{\textsf{NP-Hard}}}
+\newcommand{\NPC}{\ensuremath{\textsf{NP-Complete}}}
+\newcommand{\ksum}{\ensuremath{k\mathsf{-Sum}}}
+\newcommand{\eqcarpart}{\textsf{Equal Cardinality Partition}}
+\newcommand{\knapsack}{\textsf{Knapsack}}
+\newcommand{\subsetsum}{\textsf{Subset Sum}}
+
+\newcommand{\bigo}[1]{\ensuremath{\operatorname{\mathcal{O}}\!\lrp{#1}}}
+\newcommand{\bigomega}[1]{\ensuremath{\Omega\!lrp{#1}}}
+\newcommand{\polyreduce}{\ensuremath{\leq_p}}
+
+% More sets
+\newcommand{\nonneg}[1]{{\left[ {#1} \right]^+}}
+\def\sse{\subseteq}
+\def\sm{\setminus}
+\def\xbar{\bar{x}}
+\def\calZ{\mathcal{Z}}
+\def\calH{\mathcal{H}}
+\def\calV{\mathcal{V}}
+\def\calE{\mathcal{E}}
+\def\calQ{\mathcal{Q}}
+\def\calM{\mathcal{M}}
+\def\calN{\mathcal{N}}
+\def\calG{\mathcal{G}}
+\def\calR{\mathcal{R}}
+\def\calJ{\mathcal{J}}
+\def\calL{\mathcal{L}}
+\def\calP{\mathcal{P}}
+\def\calB{\mathcal{B}}
+\def\calA{\mathcal{A}}
+\def\calC{\mathcal{C}}
+\def\calX{\mathcal{X}}
+\def\calY{\mathcal{Y}}
+
+% Algorithms
+\newcommand{\Algin}{\Statex \textbf{Input:} }
+\newcommand{\Algout}{\Statex \textbf{Output:} }
+\newcommand{\Algreq}{\Statex \textbf{Require:} }
+
+% Misc
+\newcommand{\tempnote}[2]{$\ll${\bf #1: }{\it #2}$\gg$                        {\marginpar{\tiny{{\bf#1}}}}} %usage \tempnote{author}{note}
+\newcommand{\TODO}[1]{\textcolor{red}{{\bf TODO:} #1}}
+\newcommand{\cc}{\textcolor{red}{\bf [citation(s)]}}
+\newcommand{\email}[1]{\textsf{#1}}
+
+% Theorem Styling
+\newcommand{\qedsym}{\hfill$\blacksquare$}
+
+\declaretheoremstyle[
+  bodyfont=\normalfont,
+  headpunct= ,
+]{problem}
+
+\declaretheoremstyle[
+  spacebelow=6pt,
+  notefont=\mdseries, notebraces={(}{)},
+  bodyfont=\normalfont
+]{def}
+
+\declaretheoremstyle[
+  spacebelow=6pt,
+  bodyfont=\normalfont,
+  qed=\qedsym
+]{proof}
+
+\declaretheorem[style=plain]{theorem, lemma, corollary, claim, conjecture, proposition, observation, remark}
+\declaretheorem[style=problem]{problem}
+\declaretheorem[style=def]{definition}
+
+\let\proof\relax
+\declaretheorem[numbered=no, style=proof]{proof}
+
+% Cleverref
+\crefname{theorem}{Thm.}{Thms.}
+\crefname{corollary}{Cor.}{Cors.}
+\crefname{lemma}{Lem.}{Lems.}
+\crefname{claim}{Claim}{Claims}
+\crefname{problem}{Prob.}{Probs.}
+\crefname{definition}{Def.}{Defs.}
+\crefname{algorithm}{Alg.}{Algs.}

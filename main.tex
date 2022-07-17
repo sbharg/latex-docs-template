@@ -1,0 +1,33 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+%\addbibresource{refs.bib}
+\bibliographystyle{abbrvnat}
+
+% Custom macros
+
+\title{Title}
+\author{
+    Name\\
+    Institute\\
+    \email{email@email.com}
+}
+\date{} 
+
+\begin{document}
+    \maketitle  
+
+    \begin{abstract}
+
+    \end{abstract}
+    \newpage
+
+    \section{Introduction}
+    \input{sections/introduction.tex}
+
+    \newpage
+    % Delete prev .bbl file if switching between biblatex and bibtex
+
+    %\printbibliography
+    \bibliography{refs}
+ 
+\end{document}
