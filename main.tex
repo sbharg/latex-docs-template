@@ -1,7 +1,8 @@
 \documentclass[11pt]{article}
 \usepackage{preamble}
+
+% If using biblatex, specify bib file here
 %\addbibresource{refs.bib}
-\bibliographystyle{abbrvnat}
 
 % Custom macros
 
@@ -27,7 +28,7 @@
     \newpage
     % Delete prev .bbl file if switching between biblatex and bibtex
 
-    %\printbibliography
-    \bibliography{refs}
+    %\printbibliography     % For biblatex
+    \bibliography{refs}     % For bibtex/natbib
  
 \end{document}

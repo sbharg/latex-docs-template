@@ -6,6 +6,25 @@
 % Packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Paper dimensions - A4 vs Letterpaper
+%------------------------------------%
+\DeclareOption{a4}{
+  \PassOptionsToPackage{a4paper, margin=2cm}{geometry}
+}
+\DeclareOption{letter}{
+  \PassOptionsToPackage{letterpaper, margin=1in}{geometry}
+}
+
+% Bib Management - biblatex vs natbib
+%-----------------------------------%
+\newif\if@biblatex\@biblatexfalse
+\DeclareOption{biblatex}{
+  \@biblatextrue
+}
+
+\ExecuteOptions{letter}
+\ProcessOptions\relax
+
 % Pdf Packages
 %------------%
 \RequirePackage[utf8]{inputenc}
@@ -20,6 +39,16 @@
 \RequirePackage{booktabs}
 \RequirePackage{xspace}
 \RequirePackage{enumitem}
+
+\RequirePackage{geometry}
+
+\if@biblatex
+\RequirePackage[backend = biber, doi = false, maxcitenames = 2, maxbibnames = 99, isbn = false, url = false, style = numeric, natbib = true]{biblatex}
+\addbibresource{refs.bib}
+\else
+\RequirePackage[square,numbers]{natbib}
+\bibliographystyle{plainnat}
+\fi
 
 \RequirePackage{pdfrender}
 \makeatletter
@@ -99,17 +128,6 @@
 \RequirePackage[labelfont=bf]{caption}
 \RequirePackage{subcaption}
 
-% Paper dimensions - A4 vs Letterpaper
-%------------------------------------%
-%\RequirePackage[letterpaper, margin=1in]{geometry}
-\RequirePackage[a4paper, margin=2cm]{geometry}
-%------------------------------------%
- 
-% Bib Management - biblatex vs bibtex
-%-----------------------------------%
-%\RequirePackage[backend = biber, doi = false, maxcitenames = 2, maxbibnames = 99, isbn = false, url = false, style = numeric, natbib = true]{biblatex}
-\RequirePackage[square,numbers]{natbib}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom commands -- math symbols and math shortcuts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -168,7 +186,7 @@
 \def\calC{\mathcal{C}}
 \def\calX{\mathcal{X}}
 \def\calY{\mathcal{Y}}
-
+ 
 % Algorithms
 \newcommand{\Algin}{\Statex \textbf{Input:} }
 \newcommand{\Algout}{\Statex \textbf{Output:} }
@@ -198,6 +216,7 @@
 \declaretheoremstyle[
   spacebelow=6pt,
   bodyfont=\normalfont,
+  notefont=\bfseries, notebraces={}{},
   qed=\qedsym
 ]{proof}
 
@@ -209,10 +228,16 @@
 \declaretheorem[numbered=no, style=proof]{proof}
 
 % Cleverref
-\crefname{theorem}{Thm.}{Thms.}
-\crefname{corollary}{Cor.}{Cors.}
-\crefname{lemma}{Lem.}{Lems.}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{lemma}{Lemma}{Lemmas.}
 \crefname{claim}{Claim}{Claims}
-\crefname{problem}{Prob.}{Probs.}
-\crefname{definition}{Def.}{Defs.}
-\crefname{algorithm}{Alg.}{Algs.}
+\crefname{observation}{Observation}{Observations}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{remark}{Remark}{Remarks}
+\crefname{problem}{Problem}{Problems}
+\crefname{definition}{Definition}{Definitions}
+\crefname{algorithm}{Algorithm}{Algorithms}
+
+\endinput
