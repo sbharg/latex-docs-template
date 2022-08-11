@@ -35,6 +35,8 @@
 \DeclareUnicodeCharacter{2212}{-}
 \RequirePackage{comment}
 \RequirePackage[page]{appendix}
+\RequirePackage{authblk}
+\renewcommand*{\Affilfont}{\normalsize\normalfont}
 
 \RequirePackage{booktabs}
 \RequirePackage{xspace}
@@ -195,7 +197,7 @@
 \newcommand{\tempnote}[2]{$\ll${\bf #1: }{\it #2}$\gg$                        {\marginpar{\tiny{{\bf#1}}}}} %usage \tempnote{author}{note}
 \newcommand{\TODO}[1]{\textcolor{red}{{\bf TODO:} #1}}
 \newcommand{\cc}{\textcolor{red}{\bf [citation(s)]}}
-\newcommand{\email}[1]{\textsf{#1}}
+\newcommand{\email}[1]{\texttt{#1}}
 \newcommand{\func}[2]{\ensuremath{#1 \! \lrp{#2}}}
 
 % Theorem Styling
@@ -214,8 +216,9 @@
 
 \declaretheoremstyle[
   spacebelow=6pt,
+  headfont=\itshape,
   bodyfont=\normalfont,
-  notefont=\bfseries, notebraces={}{},
+  notefont=\itshape, notebraces={}{},
   qed=\qedsym
 ]{proof}
 
