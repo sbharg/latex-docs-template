@@ -51,17 +51,6 @@
 \bibliographystyle{plainnat}
 \fi
 
-\RequirePackage{pdfrender}
-\makeatletter
-\let\normalrender\PdfRender@NormalColorHook
-\let\PdfRender@NormalColorHook\@empty
-\newcommand*{\textnormalrender}[1]{%
-  \begingroup\normalrender#1\endgroup
-}
-\makeatother
-
-\pdfrender{TextRenderingMode=2,LineWidth=0.1pt}%
-
 % Makes title bold
 \makeatletter
 \def\@maketitle{%
@@ -232,7 +221,7 @@
 % Cleverref
 \crefname{theorem}{Theorem}{Theorems}
 \crefname{corollary}{Corollary}{Corollaries}
-\crefname{lemma}{Lemma}{Lemmas.}
+\crefname{lemma}{Lemma}{Lemmas}
 \crefname{claim}{Claim}{Claims}
 \crefname{observation}{Observation}{Observations}
 \crefname{proposition}{Proposition}{Propositions}
@@ -241,5 +230,7 @@
 \crefname{problem}{Problem}{Problems}
 \crefname{definition}{Definition}{Definitions}
 \crefname{algorithm}{Algorithm}{Algorithms}
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
 
 \endinput
