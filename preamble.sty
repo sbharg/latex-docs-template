@@ -35,8 +35,8 @@
 \RequirePackage{comment}
 \RequirePackage[page]{appendix}
 \RequirePackage{authblk}
-\renewcommand*{\Authfont}{\normalsize\normalfont}
-\renewcommand*{\Affilfont}{\small\normalfont}
+\renewcommand*{\Authfont}{\large\normalfont}
+\renewcommand*{\Affilfont}{\normalsize\normalfont}
 
 \RequirePackage{booktabs}
 \RequirePackage{xspace}
@@ -56,21 +56,33 @@
 \def\@maketitle{%
   \newpage
   \null
-  \vskip 2em%
+  \vskip 1em%
   \begin{center}%
   \let \footnote \thanks
-    {\Large\bfseries\@title \par}%
+    {\LARGE\bfseries\@title \par}%
     \vskip 1.5em%
     {\large
       \lineskip .5em%
       \begin{tabular}[t]{c}%
         \@author
       \end{tabular}\par}%
-    \vskip 1em%
+    \vskip 0.5em%
     {\normalsize \@date}%
   \end{center}%
   \par
-  \vskip 1.5em}
+  \vskip 1em}
+
+\renewenvironment{abstract}
+  {\small
+    \begin{center}
+    \bfseries \abstractname\vspace{-.5em}\vspace{\z@}
+    \end{center}
+    \list{}{%
+      \setlength{\leftmargin}{1.25cm}% <---------- CHANGE HERE
+      \setlength{\rightmargin}{\leftmargin}%
+    }%
+    \item\relax}
+  {\endlist}
 \makeatother
 
 \AtBeginDocument{\def\keywordname{{\bf Keywords:}}}
