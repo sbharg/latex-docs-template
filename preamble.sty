@@ -1,6 +1,6 @@
 % Required for TeX packages
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{preamble}[custom shortcuts as a package]
+\ProvidesPackage{preamble}[custom preamble as a package]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
@@ -8,6 +8,7 @@
 
 % --Paper dimensions-------------
 % A4 vs Letterpaper
+% Default: Letter
 \DeclareOption{a4}{
   \PassOptionsToPackage{a4paper, margin=2cm}{geometry}
 }
@@ -17,6 +18,7 @@
 
 % --Bib Management---------------
 % Biblatex vs natbib
+% Default: natbib
 \newif\if@biblatex\@biblatexfalse
 \DeclareOption{biblatex}{
   \@biblatextrue
@@ -45,7 +47,7 @@
 \RequirePackage{geometry}
 
 \if@biblatex
-\RequirePackage[backend = biber, doi = false, maxcitenames = 2, maxbibnames = 99, isbn = false, url = false, style = numeric, natbib = true]{biblatex}
+\RequirePackage[backend = biber, doi = false, maxcitenames = 2, maxbibnames = 99, isbn = false, url = false, style = numeric, natbib = true, giveninits= true]{biblatex}
 \else
 \RequirePackage[square,numbers]{natbib}
 \bibliographystyle{plainnat}
@@ -130,7 +132,7 @@
 \RequirePackage{subcaption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Custom commands -- math symbols and math shortcuts
+% Custom commands -- Some math symbols and math shortcuts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % --Shortcuts for left/right-----
@@ -147,22 +149,25 @@
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\RR}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\powerset}{\ensuremath{\mathcal{P}}}
 
+% --Probability------------------
+\newcommand{\EX}[1]{\ensuremath{\mathbb{E}\! \lrb{#1}}}
+\newcommand{\PR}[1]{\ensuremath{\mathrm{Pr}\! \lrb{#1}}}
+
 % --Complexity-------------------
-\newcommand{\NP}{\ensuremath{\textsf{NP}}}
-\newcommand{\NPH}{\ensuremath{\textsf{NP-Hard}}}
-\newcommand{\NPC}{\ensuremath{\textsf{NP-Complete}}}
+\newcommand{\NP}{\textsf{NP}}
+\newcommand{\NPH}{\textsf{NP-Hard}}
+\newcommand{\NPC}{\textsf{NP-Complete}}
 \newcommand{\ksum}{\ensuremath{k\mathsf{-Sum}}}
 \newcommand{\eqcarpart}{\textsf{Equal Cardinality Partition}}
 \newcommand{\knapsack}{\textsf{Knapsack}}
 \newcommand{\subsetsum}{\textsf{Subset Sum}}
 
 \newcommand{\bigo}[1]{\ensuremath{\operatorname{\mathcal{O}}\!\lrp{#1}}}
-\newcommand{\bigomega}[1]{\ensuremath{\Omega\!lrp{#1}}}
+\newcommand{\bigomega}[1]{\ensuremath{\Omega\!\lrp{#1}}}
 \newcommand{\polyreduce}{\ensuremath{\leq_p}}
 
 % --More sets--------------------
@@ -198,7 +203,8 @@
 \newcommand{\tempnote}[2]{$\ll${\bf #1: }{\it #2}$\gg${\marginpar{\tiny{{\bf#1}}}}}
 % Usage: \newedit[Optional Tag on Margin]{Comment}
 \newcommand{\newedit}[2][]{\textcolor{OrangeRed}{#2}{\marginpar{\tiny{{\bf \textcolor{OrangeRed}{#1}}}}}}
-\newcommand{\TODO}[1]{\textcolor{red}{{\bf TODO:} #1}}
+\newcommand{\TODO}[1]{\textcolor{OrangeRed}{{\bf TODO:} #1}}
+\newcommand{\NOTE}[1]{\textcolor{OrangeRed}{{\bf NOTE:}} #1}
 \newcommand{\cc}{\textcolor{red}{\bf [citation(s)]}}
 \newcommand{\email}[1]{\texttt{#1}}
 \newcommand{\func}[2]{\ensuremath{#1 \! \lrp{#2}}}
@@ -207,30 +213,26 @@
 \newcommand{\qedsym}{\hfill$\blacksquare$}
 
 \declaretheoremstyle[
-  bodyfont=\normalfont,
-  headpunct= ,
-]{problem}
-
-\declaretheoremstyle[
-  spacebelow=6pt,
-  notefont=\mdseries, notebraces={(}{)},
+  spacebelow=\topsep,
+  spaceabove=\topsep,
+  notefont=\normalfont\itshape, notebraces={(}{)},
   bodyfont=\normalfont
 ]{def}
-
+ 
 \declaretheoremstyle[
-  spacebelow=6pt,
+  spacebelow=\topsep,
   headfont=\itshape,
   bodyfont=\normalfont,
   notefont=\itshape, notebraces={}{},
   qed=\qedsym
 ]{proof}
 
-\declaretheorem[style=plain]{theorem, lemma, corollary, claim, conjecture, proposition, observation, remark}
-\declaretheorem[style=problem]{problem}
+\declaretheorem[style=plain]{theorem, lemma, corollary, claim, conjecture, proposition, observation, remark, problem}
 \declaretheorem[style=def]{definition}
 
 \let\proof\relax
 \declaretheorem[numbered=no, style=proof]{proof}
+\declaretheorem[numbered=no, style=proof, name=Proof Sketch]{proofsketch}
 
 % --Cleverref--------------------
 \crefname{theorem}{Theorem}{Theorems}
@@ -242,9 +244,9 @@
 \crefname{conjecture}{Conjecture}{Conjectures}
 \crefname{remark}{Remark}{Remarks}
 \crefname{problem}{Problem}{Problems}
-\crefname{definition}{Definition}{Definitions}
+\crefname{definition}{Def.}{Defs.}
 \crefname{algorithm}{Algorithm}{Algorithms}
-\crefname{figure}{Figure}{Figures}
+\crefname{figure}{Fig.}{Figs.}
 \crefname{table}{Table}{Tables}
 
 \endinput
