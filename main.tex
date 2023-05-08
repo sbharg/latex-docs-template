@@ -1,30 +1,27 @@
 \documentclass[11pt]{article}
+
 \usepackage{preamble}
+\input{commands.tex}
 
-% If using biblatex, specify bib file here
-%\addbibresource{refs.bib}
+% Macros
 
-% Custom macros
-
-\title{Title}
-\author{Bhargav Samineni}
-\affil{Department of Computer Science, New Jersey Institute of Technology, NJ, USA \\ \email{bs567@njit.edu}}
-\date{} 
+\title{Notes Template}
+\author{
+	Bhargav Samineni
+}
+\date{}
 
 \begin{document}
     \maketitle  
 
     \begin{abstract}
-
+        \lipsum[2]
     \end{abstract}
 
-    \section{Introduction}
-    \input{sections/introduction.tex}
+    \input{sections/1_introduction.tex}
     
     \newpage
-    % Delete prev .bbl file if switching between biblatex and bibtex
-
-    %\printbibliography     % For biblatex
-    \bibliography{refs}     % For bibtex/natbib
+    \bibliographystyle{plainurl}
+    \bibliography{refs}
  
 \end{document}
